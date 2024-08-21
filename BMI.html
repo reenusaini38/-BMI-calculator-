@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>BMI Calculator using JavaScript with Source Code - Reenu saini</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&family=Potta+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+}
+
+.container {
+  width: 22rem;
+  margin-top: 8rem;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.inputs input {
+  outline: none;
+  height: 30px;
+}
+
+#results {
+  font-size: 20px;
+  text-align: center;
+  color: blue;
+}
+
+.calcBtn {
+  width: 100%;
+  padding: 8px 0;
+  margin-top: 10px;
+  border-radius: 5px;
+  border-style: none;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#message {
+  text-align: center;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">BMI Calculator</h2>
+        <form>
+            <p class="inputs">
+                <label>Height (CM): </label>
+                <input type="number" id="height" min="1">
+            </p>
+            <p class="inputs">
+                <label>Weight (KG): </label>
+                <input type="number" id="weight" min="1">
+            </p>
+    
+            <button class="calcBtn">Calculate</button>
+            <div style="margin-top: 20px;">Your BMI is: <p id="results"></p>
+            </div>
+            <p id="message"></p>
+    
+        </form>
+    </div>
+
+    <script>
+        const form = document.querySelector('form');
+
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const height = parseInt(document.querySelector('#height').value);
+    const weight = parseInt(document.querySelector('#weight').value);
+    const results = document.querySelector('#results');
+    const message = document.querySelector('#message');
+
+    if ((height === '') || (height < 0) || (isNaN(height))) {
+        //NaN !== NaN
+        results.innerHTML = "Please provide a valid height";
+
+    } else if (weight === '' || weight < 0 || isNaN(weight)) {
+        results.innerHTML = "Please provide a valid weight";
+    } else {
+        // Calculate BMI
+        const bmi = (weight / ((height * height) / 10000)).toFixed(2);
+        // Display the results
+        results.innerHTML = `<span>${bmi}</span>`
+
+        // Display End Message
+        if (bmi < 18.6) {
+            message.innerHTML = "You are underweight";
+        } else if (bmi > 18.6 && bmi < 24.9) {
+            message.innerHTML = "Normal"
+        } else if (bmi > 24.9) {
+            message.innerHTML = "You are Overweight"
+        }
+    }
+}); 
+    </script>
+</body>
+
+</html>
